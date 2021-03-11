@@ -1,10 +1,12 @@
-package com.binhle.domain;
+package com.binhle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DemoApplication {
+import com.binhle.domain.Book;
+
+public class HJPAApplication {
 	private final static EntityManagerFactory ENTITY_MANAGER_FACTORY;
 	private final static String PERSISTENCE_UNIT_HIBERNATE_JPA = "hibernatejpa-pu";
 	
