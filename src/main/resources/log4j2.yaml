@@ -1,0 +1,24 @@
+configuration:
+  name: Hibernate-JPA
+  properties:
+    property:
+      name: log-path
+      value: "logs"
+  appenders:
+    console:
+      name: console_appender
+      target: SYSTEM_OUT
+      patternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+    file:
+      name: file_appender
+      fileName: ${log-path}/hjpa.log 
+      patternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+  loggers:
+    root:
+      level: all
+      appenderRef:
+        - ref: console_appender
+        - ref: file_appender
+          level: error
