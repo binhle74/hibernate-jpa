@@ -1,10 +1,11 @@
-package com.binhle;
+package com.binhle.hjpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.binhle.domain.Book;
+import com.binhle.hjpa.domain.Book;
+
 
 public class HJPAApplication {
 	private final static EntityManagerFactory ENTITY_MANAGER_FACTORY;

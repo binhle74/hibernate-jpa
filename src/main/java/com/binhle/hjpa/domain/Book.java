@@ -1,4 +1,4 @@
-package com.binhle.domain;
+package com.binhle.hjpa.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
