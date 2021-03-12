@@ -16,6 +16,19 @@ configuration:
       patternLayout:
         pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
   loggers:
+    logger:
+      - 
+        name: org.hibernate.SQL
+        level: debug
+        additivity: false
+        AppenderRef:
+          ref: console_appender
+      - 
+        name: org.hibernate.type.descriptor.sql
+        level: trace
+        additivity: false
+        AppenderRef:
+          ref: console_appender
     root:
       level: all
       appenderRef:
