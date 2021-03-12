@@ -1,0 +1,17 @@
+Configuration:
+  name: Hibernate-JPA
+  properties:
+    property:
+      name: log-path
+      value: 
+  appenders:
+    Console:
+      name: STDOUT
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+  loggers:
+    Root:
+      level: all
+      AppenderRef:
+        ref: STDOUT
