@@ -30,7 +30,7 @@ configuration:
         AppenderRef:
           ref: console_appender
     root:
-      level: all
+      level: info
       appenderRef:
         - ref: console_appender
         - ref: file_appender
