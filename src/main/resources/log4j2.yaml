@@ -24,6 +24,24 @@ configuration:
         AppenderRef:
           ref: console_appender
       - 
+        name: org.hibernate.id
+        level: all
+        additivity: false
+        AppenderRef:
+          ref: console_appender
+      - 
+        name: org.hibernate.event
+        level: all
+        additivity: false
+        AppenderRef:
+          ref: console_appender
+      - 
+        name: org.hibernate.engine.spi
+        level: all
+        additivity: false
+        AppenderRef:
+          ref: console_appender
+      - 
         name: org.hibernate.type.descriptor.sql
         level: trace
         additivity: false
