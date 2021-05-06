@@ -13,11 +13,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>5.4.29.Final</hibernate.version>
 		<persistence-api.version>2.2</persistence-api.version>
+		<bean-validation.version>2.0.1.Final</bean-validation.version>
 		<postgresql.version>42.2.19</postgresql.version>
 		<lombok.version>1.18.16</lombok.version>
 		<log4j2.version>2.14.1</log4j2.version>
 		<jackson-faster-xml.version>2.12.2</jackson-faster-xml.version>
 		<junit.version>4.13.2</junit.version>
+		
 	</properties>
 
 	<dependencies>
@@ -25,6 +27,12 @@
 			<groupId>javax.persistence</groupId>
 			<artifactId>javax.persistence-api</artifactId>
 			<version>${persistence-api.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>${bean-validation.version}</version>
 		</dependency>
 
 		<dependency>
