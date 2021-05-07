@@ -1,6 +1,9 @@
 package com.binhle.hjpa.inheritance.mappedsuperclass;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +27,9 @@ public class ImplicitInheritanceTest {
     public void testMappedSuperClass() {
         logger.info("----DAHDS");
 //        entityManager.getTransaction().begin();
-        BillingDetails a = entityManager.find(BillingDetails.class, 1);
+//        BillingDetails a = entityManager.find(BillingDetails.class, 1);
+        TypedQuery<BillingDetails> query = entityManager.createQuery("select bd from BillingDetails", BillingDetails.class);
+        List<BillingDetails> a = query.getResultList();
         logger.info("-------- ABC {}", a);
 //        CreditCard cc = new CreditCard();
 //        cc.cardNumber = "1";
