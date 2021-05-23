@@ -30,6 +30,17 @@ public class MixedStrategyTest {
     }
     
     @Test
+    public void testQueryCreditCard() {
+        List<CreditCard> creditCardList = createCreditCard(1);
+        logger.info("---> Credit Card: {}", creditCardList);
+        TypedQuery<CreditCard> query = entityManager.createQuery(
+                "select cc from com.binhle.hjpa.inheritance.mixed.CreditCard cc", CreditCard.class);
+        List<CreditCard> a = query.getResultList();
+        
+        assertFalse(a.isEmpty());
+    }
+    
+    @Test
     public void testMixedStrategy() {
         // Create
         List<Long> creditCardList = createCreditCard(1).stream()
