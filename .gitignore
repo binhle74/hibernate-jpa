@@ -13,3 +13,5 @@ buildNumber.properties
 .classpath
 .project
 **/*.log
+.DS_Store
+
