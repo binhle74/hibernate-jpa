@@ -17,6 +17,7 @@ public abstract class BaseTest {
     private EntityManager entityManager;
 
     public abstract void before();
+    public abstract void after();
 
     protected void closeEntityManager() {
         if (Objects.nonNull(entityManager) && entityManager.isOpen()) {
