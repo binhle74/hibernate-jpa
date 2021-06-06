@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,5 +49,11 @@ public class BagMappingTest extends BaseTest {
         }
 
         cleanData(Item.class);
+    }
+
+    @After
+    @Override
+    public void after() {
+       cleanData(Item.class);
     }
 }
