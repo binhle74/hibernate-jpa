@@ -1,6 +1,6 @@
-package com.binhle.hjpa.mappingcollections.setofstrings;
+package com.binhle.hjpa.mappingcollections.setofstringsorderby;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -11,14 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Entity(name = "C714SetItem")
-public class Item {
+@Entity(name = "C718SetJpaOrderByItem")
+@Table(name = "C718SET_JPA_ORDERBY_ITEM")
+public class JpaOrderByItem {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,12 +29,12 @@ public class Item {
 
     @Getter
     @Setter
-    @Column(length = 50, nullable = false, unique = true)
     private String name;
 
     @Getter
     @ElementCollection
-    @CollectionTable(name = "C714_SET_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
+    @CollectionTable(name = "C718SET_JPA_ORDERBY_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
+    @OrderBy // Always ASC by basic object likes: String, Integer
     @Column(name = "FILENAME")
-    private Set<String> images = new HashSet<>();
+    private Set<String> images = new LinkedHashSet<>();
 }

@@ -19,20 +19,20 @@ public abstract class BaseTest {
     public abstract void before();
     public abstract void after();
 
-    protected void closeEntityManager() {
+    public void closeEntityManager() {
         if (Objects.nonNull(entityManager) && entityManager.isOpen()) {
             entityManager.close();
         }
     }
 
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         if (Objects.isNull(entityManager) || !entityManager.isOpen()) {
             entityManager = EntityManagerUtil.createEntityManager();
         }
         return entityManager;
     }
 
-    protected BaseTest beginTransaction() {
+    public BaseTest beginTransaction() {
         EntityManager entityManager = this.getEntityManager();
         if (!entityManager.getTransaction().isActive()) {
             entityManager.getTransaction().begin();
@@ -40,7 +40,7 @@ public abstract class BaseTest {
         return this;
     }
 
-    protected BaseTest commitTransaction() {
+    public BaseTest commitTransaction() {
         EntityManager entityManager = this.getEntityManager();
         if (entityManager.getTransaction().isActive()) {
             entityManager.getTransaction().commit();
@@ -48,13 +48,13 @@ public abstract class BaseTest {
         return this;
     }
 
-    protected <T> BaseTest persist(T entity) {
+    public <T> BaseTest persist(T entity) {
         EntityManager entityManager = this.getEntityManager();
         entityManager.persist(entity);
         return this;
     }
 
-    protected <T> void cleanData(Class<T> clazz) {
+    public <T> void cleanData(Class<T> clazz) {
         EntityManager entityManager = this.getEntityManager();
         beginTransaction();
         List<T> entities = findAll(clazz);
@@ -62,12 +62,21 @@ public abstract class BaseTest {
         commitTransaction();
     }
 
-    protected <T> List<T> findAll(Class<T> clazz) {
+    public <T> List<T> findAll(Class<T> clazz) {
         EntityManager entityManager = this.getEntityManager();
         String sql = String.format("select o from %s o", clazz.getName());
         logger.info("--- Fetch all entity by SQL={}", sql);
         TypedQuery<T> query = entityManager.createQuery(sql, clazz);
         List<T> entities = query.getResultList();
         return entities;
+    }
+
+    public <T> T find(Class<T> clazz, Object primaryKey) {
+        EntityManager entityManager = this.getEntityManager();
+        return entityManager.find(clazz, primaryKey);
+    }
+
+    public static String concat(String str1, String str2) {
+        return str1 + (str1 == "" ? "" : ",") + str2;
     }
 }

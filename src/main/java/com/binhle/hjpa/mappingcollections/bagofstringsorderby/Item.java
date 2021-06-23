@@ -1,4 +1,4 @@
-package com.binhle.hjpa.mappingcollections.bagofstrings;
+package com.binhle.hjpa.mappingcollections.bagofstringsorderby;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,13 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.OrderBy;
+import org.hibernate.annotations.Type;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Entity(name = "C715BagItem")
+@Entity(name = "C718BagOrderByItem")
+@Table(name = "C718BAG_ORDERBY_ITEM")
 public class Item {
     @Getter
     @Id
@@ -26,13 +32,13 @@ public class Item {
 
     @Getter
     @Setter
-    @Column(length = 50, nullable = false, unique = true)
     private String name;
 
     @Getter
     @ElementCollection
-    @CollectionTable(name = "C715BAG_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
-    @org.hibernate.annotations.CollectionId(columns = @Column(name = "IMAGE_ID"), generator = "sequence", type = @org.hibernate.annotations.Type(type = "long"))
+    @CollectionTable(name = "C718BAG_ORDERBY_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
+    @CollectionId(columns = @Column(name = "IMAGE_ID"), type = @Type(type = "long"), generator = "sequence")
+    @OrderBy(clause = "FILENAME desc")
     @Column(name = "FILENAME")
     private Collection<String> images = new ArrayList<>();
 }

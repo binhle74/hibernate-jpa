@@ -1,0 +1,7 @@
+{
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.format.enabled": true,
+    "java.format.onType.enabled": true,
+    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSave": true
+}

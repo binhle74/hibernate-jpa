@@ -1,7 +1,7 @@
-package com.binhle.hjpa.mappingcollections.setofstrings;
+package com.binhle.hjpa.mappingcollections.mapofstrings;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -11,27 +11,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Entity(name = "C714SetItem")
+@Entity(name = "C717MapItem")
 public class Item {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Getter
     @Setter
-    @Column(length = 50, nullable = false, unique = true)
+    @Getter
     private String name;
 
     @Getter
     @ElementCollection
-    @CollectionTable(name = "C714_SET_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
-    @Column(name = "FILENAME")
-    private Set<String> images = new HashSet<>();
+    @CollectionTable(name = "C717MAP_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
+    @MapKeyColumn(name = "FILENAME")
+    @Column(name = "IMAGENAME")
+    private Map<String, String> images = new HashMap<>();
 }

@@ -1,7 +1,7 @@
-package com.binhle.hjpa.mappingcollections.setofstrings;
+package com.binhle.hjpa.mappingcollections.sortedsetofstrings;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -11,13 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.SortNatural;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Entity(name = "C714SetItem")
+@Entity(name = "C718SortedSetItem")
+@Table(name = "C718SORTED_SET_ITEM")
 public class Item {
     @Getter
     @Id
@@ -26,12 +30,12 @@ public class Item {
 
     @Getter
     @Setter
-    @Column(length = 50, nullable = false, unique = true)
     private String name;
 
     @Getter
     @ElementCollection
-    @CollectionTable(name = "C714_SET_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
+    @CollectionTable(name = "C718SORTED_SET_IMAGE", joinColumns = @JoinColumn(name = "ITEM_ID"))
     @Column(name = "FILENAME")
-    private Set<String> images = new HashSet<>();
+    @SortNatural
+    private SortedSet<String> images = new TreeSet<>();
 }

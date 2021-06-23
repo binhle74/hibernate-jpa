@@ -95,7 +95,7 @@ public class PolymorphicAssociationTest {
         return userList;
     }
 
-    private void cleanData() {
+    protected void cleanData() {
         entityManager.getTransaction().begin();
         List<User> userList = getAll();
         for (User b : userList) {

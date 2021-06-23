@@ -56,6 +56,9 @@ public class SetMappingTest extends BaseTest {
         cleanData(Item.class);
     }
 
+    /**
+     * IMAGE table has composite primary key of both ITEM_ID and FILENAME columns
+     */
     @Test
     public void testDuplicatedImages() {
         int numOfItems = 2;
@@ -67,7 +70,7 @@ public class SetMappingTest extends BaseTest {
             item.setName("Item " + i);
             for (int j = 1; j <= numOfImages; j++) {
                 item.getImages().add("foo-" + j + ".jpg");
-                
+
                 // Can not add duplicated images
                 item.getImages().add("foo-" + j + ".jpg");
                 item.getImages().add("foo-" + j + ".jpg");
@@ -88,6 +91,26 @@ public class SetMappingTest extends BaseTest {
         for (Item item : items) {
             assertEquals(numOfImages, item.getImages().size());
         }
+
+        cleanData(Item.class);
+    }
+
+    @Test
+    public void testImageOrder() {
+        beginTransaction();
+        Item item = new Item();
+        item.setName("Item Test Order 1");
+        item.getImages().add("fbc-1.jpg");
+        item.getImages().add("abc-1.jpg");
+        item.getImages().add("ods-1.jpg");
+        persist(item);
+        commitTransaction().closeEntityManager();
+        Item loadedItem = getEntityManager().find(Item.class, item.getId());
+        String expectedImagesOrder = "abc-1.jpg, ods-1.jpg, fbc-1.jpg";
+
+        // Verify
+        String loadedImagesOrder = loadedItem.getImages().stream().reduce("", (s, i) -> s + (s == "" ? "" : ", ") + i);
+        assertEquals(expectedImagesOrder, loadedImagesOrder);
 
         cleanData(Item.class);
     }

@@ -1,6 +1,7 @@
 package com.binhle.hjpa.mappingcollections.bagofstrings;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class BagMappingTest extends BaseTest {
         closeEntityManager();
     }
 
+    /**
+     * Using additional primary key IMAGE_ID to allow the duplicate FILENAME for
+     * each ITEM_ID
+     */
     @Test
     public void testBagOfImages() {
         int numOfItems = 5;
@@ -47,13 +52,50 @@ public class BagMappingTest extends BaseTest {
         for (Item item : items) {
             assertEquals(numOfImages * 2, item.getImages().size());
         }
+    }
 
-        cleanData(Item.class);
+    @Test
+    public void testImagesOrder() {
+        beginTransaction();
+        Item item = new Item();
+        item.setName("Item with Bag of images");
+        item.getImages().add("fbc-1.jpg");
+        item.getImages().add("abc-3.jpg");
+        item.getImages().add("abc-1.jpg");
+        item.getImages().add("ods-1.jpg");
+        String expectedImages = item.getImages().stream().reduce("", (s, i) -> s + (s == "" ? "" : ", ") + i);
+
+        this.persist(item).commitTransaction().closeEntityManager();
+        Item loadedItem = getEntityManager().find(Item.class, item.getId());
+
+        // Verify
+        String loadedImages = loadedItem.getImages().stream().reduce("", (s, i) -> s + (s == "" ? "" : ", ") + i);
+        assertEquals(expectedImages, loadedImages);
+    }
+
+    @Test
+    public void testRemoveImages() {
+        this.beginTransaction();
+        Item item = new Item();
+        item.setName("Bag Item Test 1");
+        item.getImages().add("abc-1.jpg");
+        item.getImages().add("abc-3.jpg");
+        item.getImages().add("abc-2.jpg");
+        item.getImages().add("abc-4.jpg");
+        item.getImages().add("abc-5.jpg");
+        this.persist(item).commitTransaction().closeEntityManager();
+
+        Item savedItem = this.find(Item.class, item.getId());
+        savedItem.getImages().remove("abc-2.jpg");
+        this.beginTransaction().persist(savedItem).commitTransaction().closeEntityManager();
+
+        // Verify
+        assertNotNull(savedItem);
     }
 
     @After
     @Override
     public void after() {
-       cleanData(Item.class);
+        cleanData(Item.class);
     }
 }

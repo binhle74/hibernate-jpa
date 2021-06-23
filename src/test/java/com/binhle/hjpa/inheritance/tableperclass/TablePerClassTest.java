@@ -1,10 +1,6 @@
 package com.binhle.hjpa.inheritance.tableperclass;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -37,7 +33,7 @@ public class TablePerClassTest {
 //        cc.expYear = "2025";
 //        cc.owner = "Binh Le";
 //        entityManager.persist(cc);
-        
+
 //        BankAccount ba = new BankAccount();
 //        ba.account = "111";
 //        ba.bankName = "ACB";
