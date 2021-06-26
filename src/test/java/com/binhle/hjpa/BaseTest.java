@@ -76,7 +76,7 @@ public abstract class BaseTest {
         return entityManager.find(clazz, primaryKey);
     }
 
-    public static String concat(String str1, String str2) {
+    protected String concat(String str1, String str2) {
         return str1 + (str1 == "" ? "" : ",") + str2;
     }
 }
