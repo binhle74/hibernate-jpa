@@ -54,6 +54,14 @@ public abstract class BaseTest {
         return this;
     }
 
+    public <T> BaseTest remove(T entity) {
+        EntityManager entityManager = this.getEntityManager();
+        this.beginTransaction();
+        entityManager.remove(entity);
+        this.commitTransaction();
+        return this;
+    }
+
     public <T> void cleanData(Class<T> clazz) {
         EntityManager entityManager = this.getEntityManager();
         beginTransaction();
