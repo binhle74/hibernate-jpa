@@ -68,6 +68,7 @@ public abstract class BaseTest {
         List<T> entities = findAll(clazz);
         entities.forEach(entity -> entityManager.remove(entity));
         commitTransaction();
+        closeEntityManager();
     }
 
     public <T> List<T> findAll(Class<T> clazz) {
