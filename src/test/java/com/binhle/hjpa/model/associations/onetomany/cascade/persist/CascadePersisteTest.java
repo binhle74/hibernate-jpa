@@ -16,8 +16,8 @@ public class CascadePersisteTest extends BaseTest {
     @After
     @Override
     public void after() {
-        // this.cleanData(Bid.class);
-        // this.cleanData(Item.class);
+        this.cleanData(Bid.class);
+        this.cleanData(Item.class);
     }
 
     @Test
